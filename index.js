@@ -31,8 +31,8 @@ function thunky (fn) {
   }
 }
 
-function isError (err) { // inlined from util so this works in the browser
-  return Object.prototype.toString.call(err) === '[object Error]'
+function isError (err) {
+  return {}.toString.call(err) === '[object Error]'
 }
 
 function noop () {}
