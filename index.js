@@ -1,8 +1,5 @@
 'use strict'
 
-var nextTick = nextTickArgs
-process.nextTick(upgrade, 42) // pass 42 and see if upgrade is called with it
-
 module.exports = thunky
 
 function thunky (fn) {
@@ -28,7 +25,7 @@ function thunky (fn) {
       while (stack.length) finished(stack.shift())
 
       function finished (callback) {
-        nextTick(apply, callback, args)
+        setTimeout(apply, 0, callback, args)
       }
     }
   }
@@ -42,14 +39,4 @@ function noop () {}
 
 function apply (callback, args) {
   callback.apply(null, args)
-}
-
-function upgrade (val) {
-  if (val === 42) nextTick = process.nextTick
-}
-
-function nextTickArgs (fn, a, b) {
-  process.nextTick(function () {
-    fn(a, b)
-  })
 }
